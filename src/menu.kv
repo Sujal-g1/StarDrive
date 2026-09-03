@@ -1,358 +1,163 @@
 #:import dp kivy.metrics.dp
 
-
-# ============================================================
-# MODERN BUTTON
-# ============================================================
-
 <ModernButton@Button>:
-
     background_normal: ''
     background_down: ''
+    background_color: 0, 0, 0, 0
     border: 0, 0, 0, 0
-
-    color: 0.82, 0.94, 1, 1
+    color: 0.78, 0.94, 1, 1
     font_name: 'Eurostile.ttf'
-    font_size: dp(15)
-
+    font_size: dp(12)
+    bold: False
     canvas.before:
-
-        # Button background
         Color:
-            rgba: (0.008, 0.035, 0.055, 0.98) if self.state == 'normal' else (0.02, 0.20, 0.28, 1)
-
+            rgba: (0.02, 0.13, 0.19, 0.94) if self.state == 'normal' else (0.04, 0.30, 0.40, 0.98)
         RoundedRectangle:
             pos: self.pos
             size: self.size
-            radius: [dp(8), dp(8), dp(8), dp(8)]
+            radius: [dp(4), dp(4), dp(4), dp(4)]
 
-        # Border
         Color:
-            rgba: (0.02, 0.62, 0.82, 0.75) if self.state == 'normal' else (0.05, 0.85, 1, 1)
-
+            rgba: 0.05, 0.72, 0.95, 0.75
         Line:
-            rounded_rectangle: self.x, self.y, self.width, self.height, dp(8)
-            width: dp(1.2)
+            rounded_rectangle: self.x, self.y, self.width, self.height, dp(4)
+            width: 1.0
 
-        # Left accent
         Color:
-            rgba: 0.05, 0.8, 1, 0.95
-
+            rgba: 0.15, 0.85, 1, 0.9
         Rectangle:
-            pos: self.x, self.y + dp(7)
-            size: dp(3), self.height - dp(14)
+            pos: self.x + dp(1), self.top - dp(2)
+            size: self.width - dp(2), dp(1)
 
-        # Small right accent
-        Color:
-            rgba: 0.05, 0.8, 1, 0.5
-
-        Rectangle:
-            pos: self.right - dp(1), self.y + dp(12)
-            size: dp(1), self.height - dp(24)
-
-
-# ============================================================
-# MAIN MENU
-# ============================================================
 
 <Menu>:
-
-    # --------------------------------------------------------
-    # FULL SCREEN BACKDROP
-    # --------------------------------------------------------
+    size_hint: 1, 1
 
     canvas.before:
-
-        # Almost opaque so the race track doesn't interfere
+        # Full-screen menu dimmer: game remains visible but cannot overpower UI.
         Color:
-            rgba: 0.003, 0.008, 0.016, 0.965
-
+            rgba: 0.002, 0.006, 0.012, 0.965
         Rectangle:
             pos: self.pos
             size: self.size
 
-
-        # Subtle center glow
+        # Main panel
         Color:
-            rgba: 0.015, 0.10, 0.15, 0.18
+            rgba: 0.004, 0.018, 0.028, 0.985
+        RoundedRectangle:
+            pos: self.center_x - dp(440), self.center_y - dp(260)
+            size: dp(880), dp(520)
+            radius: [dp(12), dp(12), dp(12), dp(12)]
 
-        Rectangle:
-            pos: self.center_x - dp(350), self.center_y - dp(220)
-            size: dp(700), dp(440)
-
-
-        # Top horizontal HUD line
         Color:
-            rgba: 0.03, 0.55, 0.72, 0.55
+            rgba: 0.04, 0.65, 0.85, 0.75
+        Line:
+            rounded_rectangle: self.center_x - dp(440), self.center_y - dp(260), dp(880), dp(520), dp(12)
+            width: 1.1
 
-        Rectangle:
-            pos: self.x + dp(25), self.top - dp(62)
-            size: self.width - dp(50), dp(1)
-
-
-        # Bottom horizontal HUD line
         Color:
-            rgba: 0.03, 0.40, 0.55, 0.4
+            rgba: 0.05, 0.75, 1, 0.8
+        Line:
+            points: self.center_x - dp(420), self.center_y + dp(220), self.center_x - dp(385), self.center_y + dp(220)
+            width: 2
+        Line:
+            points: self.center_x - dp(420), self.center_y + dp(220), self.center_x - dp(420), self.center_y + dp(185)
+            width: 2
+        Line:
+            points: self.center_x + dp(420), self.center_y + dp(220), self.center_x + dp(385), self.center_y + dp(220)
+            width: 2
+        Line:
+            points: self.center_x + dp(420), self.center_y + dp(220), self.center_x + dp(420), self.center_y + dp(185)
+            width: 2
 
+        Color:
+            rgba: 0.04, 0.55, 0.72, 0.42
         Rectangle:
-            pos: self.x + dp(25), self.y + dp(45)
-            size: self.width - dp(50), dp(1)
-
-
-    # ========================================================
-    # CENTRAL PANEL
-    # ========================================================
-
-    Widget:
-
-        size_hint: 0.58, 0.72
-        pos_hint: {'center_x': 0.5, 'center_y': 0.52}
-
-        canvas:
-
-            # Panel
-            Color:
-                rgba: 0.004, 0.018, 0.03, 0.99
-
-            RoundedRectangle:
-                pos: self.pos
-                size: self.size
-                radius: [dp(16), dp(16), dp(16), dp(16)]
-
-
-            # Panel border
-            Color:
-                rgba: 0.03, 0.55, 0.72, 0.7
-
-            Line:
-                rounded_rectangle: self.x, self.y, self.width, self.height, dp(16)
-                width: dp(1.1)
-
-
-            # Top inner line
-            Color:
-                rgba: 0.05, 0.75, 0.95, 0.8
-
-            Rectangle:
-                pos: self.x + dp(30), self.top - dp(3)
-                size: self.width - dp(60), dp(2)
-
-
-            # Bottom inner line
-            Color:
-                rgba: 0.03, 0.45, 0.62, 0.5
-
-            Rectangle:
-                pos: self.x + dp(30), self.y + dp(3)
-                size: self.width - dp(60), dp(1)
-
-
-            # Top-left bracket
-            Color:
-                rgba: 0.05, 0.8, 1, 0.8
-
-            Line:
-                points: self.x + dp(20), self.top - dp(48), self.x + dp(20), self.top - dp(20), self.x + dp(48), self.top - dp(20)
-                width: dp(1)
-
-
-            # Top-right bracket
-            Line:
-                points: self.right - dp(20), self.top - dp(48), self.right - dp(20), self.top - dp(20), self.right - dp(48), self.top - dp(20)
-                width: dp(1)
-
-
-            # Bottom-left bracket
-            Line:
-                points: self.x + dp(20), self.y + dp(48), self.x + dp(20), self.y + dp(20), self.x + dp(48), self.y + dp(20)
-                width: dp(1)
-
-
-            # Bottom-right bracket
-            Line:
-                points: self.right - dp(20), self.y + dp(48), self.right - dp(20), self.y + dp(20), self.right - dp(48), self.y + dp(20)
-                width: dp(1)
-
-
-    # ========================================================
-    # TOP SYSTEM LABEL
-    # ========================================================
+            pos: self.center_x - dp(385), self.center_y - dp(155)
+            size: dp(770), dp(1)
 
     Label:
-
-        text: 'DEEP SPACE RACING DIVISION'
-
+        text: 'DEEP SPACE // RACING DIVISION'
         font_name: 'Eurostile.ttf'
         font_size: dp(9)
-
-        color: 0.25, 0.68, 0.80, 1
-
+        color: 0.20, 0.70, 0.85, 0.85
         size_hint: None, None
-        size: dp(260), dp(25)
-
-        pos_hint: {'center_x': 0.5, 'center_y': 0.755}
-
-        halign: 'center'
-        text_size: self.size
-
-
-    # ========================================================
-    # MAIN TITLE
-    # ========================================================
-
-    Label:
-
-        text: root.parent.menu_title
-
-        font_name: 'Sackers-Gothic-Std-Light.ttf'
-        font_size: dp(48)
-
-        color: 0.84, 0.95, 1, 1
-
-        size_hint: 0.8, None
-        height: dp(70)
-
-        pos_hint: {'center_x': 0.5, 'center_y': 0.675}
-
+        size: dp(500), dp(24)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.79}
         halign: 'center'
         valign: 'middle'
-
         text_size: self.size
 
-
-    # ========================================================
-    # TITLE LINE
-    # ========================================================
-
-    Widget:
-
-        size_hint: 0.30, None
-        height: dp(1)
-
-        pos_hint: {'center_x': 0.5, 'center_y': 0.605}
-
-
-        canvas:
-
-            Color:
-                rgba: 0.05, 0.68, 0.88, 0.7
-
-            Rectangle:
-                pos: self.pos
-                size: self.size
-
-
-    # ========================================================
-    # SUBTITLE
-    # ========================================================
+    Label:
+        text: root.parent.menu_title
+        font_name: 'Sackers-Gothic-Std-Light.ttf'
+        font_size: dp(45)
+        color: 0.82, 0.95, 1, 1
+        size_hint: None, None
+        size: dp(760), dp(75)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.66}
+        halign: 'center'
+        valign: 'middle'
+        text_size: self.size
 
     Label:
-
         text: 'SPACE RACING EXPERIENCE'
-
         font_name: 'Eurostile.ttf'
         font_size: dp(9)
-
-        color: 0.32, 0.68, 0.80, 1
-
+        color: 0.38, 0.65, 0.74, 0.9
         size_hint: None, None
-        size: dp(300), dp(25)
-
-        pos_hint: {'center_x': 0.5, 'center_y': 0.565}
-
-
+        size: dp(500), dp(25)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.56}
         halign: 'center'
+        valign: 'middle'
         text_size: self.size
 
-
-    # ========================================================
-    # START BUTTON
-    # ========================================================
-
     ModernButton:
-
         text: root.parent.menu_button_title
-
         size_hint: None, None
-        size: dp(250), dp(54)
-
-        pos_hint: {'center_x': 0.5, 'center_y': 0.455}
-
-        font_size: dp(15)
-
-        on_press: root.parent.on_menu_button()
-
-
-    # ========================================================
-    # MODES BUTTON
-    # ========================================================
+        size: dp(360), dp(58)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.42}
+        on_release: root.parent.on_menu_button()
 
     ModernButton:
-
         text: root.parent.menu_modes_title
-
         size_hint: None, None
-        size: dp(250), dp(48)
-
-        pos_hint: {'center_x': 0.5, 'center_y': 0.355}
-
-        font_size: dp(13)
-
-        on_press: root.parent.on_menu_modes()
-
-
-    # ========================================================
-    # BOTTOM LEFT INFO
-    # ========================================================
+        size: dp(360), dp(52)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.30}
+        on_release: root.parent.on_menu_modes()
 
     Label:
-
         text: 'SECTOR 01'
-
         font_name: 'Eurostile.ttf'
         font_size: dp(8)
-
-        color: 0.25, 0.48, 0.58, 1
-
-        size_hint: None, None
-        size: dp(100), dp(20)
-
-        pos_hint: {'x': 0.235, 'center_y': 0.205}
-
-
-    # ========================================================
-    # BOTTOM CENTER INFO
-    # ========================================================
-
-    Label:
-
-        text: 'PILOT READY'
-
-        font_name: 'Eurostile.ttf'
-        font_size: dp(8)
-
-        color: 0.25, 0.48, 0.58, 1
-
+        color: 0.25, 0.55, 0.65, 0.85
         size_hint: None, None
         size: dp(120), dp(20)
-
-        pos_hint: {'center_x': 0.5, 'center_y': 0.205}
-
-
-    # ========================================================
-    # BOTTOM RIGHT INFO
-    # ========================================================
+        pos_hint: {'x': 0.075, 'y': 0.09}
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.size
 
     Label:
-
-        text: 'SYSTEM // 100%'
-
+        text: 'PILOT READY'
         font_name: 'Eurostile.ttf'
         font_size: dp(8)
-
-        color: 0.25, 0.48, 0.58, 1
-
+        color: 0.20, 0.85, 0.60, 0.88
         size_hint: None, None
-        size: dp(130), dp(20)
+        size: dp(150), dp(20)
+        pos_hint: {'center_x': 0.5, 'y': 0.09}
+        halign: 'center'
+        valign: 'middle'
+        text_size: self.size
 
-        pos_hint: {'right': 0.765, 'center_y': 0.205}
+    Label:
+        text: 'SYSTEM // 100%'
+        font_name: 'Eurostile.ttf'
+        font_size: dp(8)
+        color: 0.25, 0.55, 0.65, 0.85
+        size_hint: None, None
+        size: dp(150), dp(20)
+        pos_hint: {'right': 0.925, 'y': 0.09}
+        halign: 'right'
+        valign: 'middle'
+        text_size: self.size

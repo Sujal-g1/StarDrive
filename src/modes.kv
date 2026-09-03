@@ -1,0 +1,156 @@
+#:import dp kivy.metrics.dp
+
+<ModeButton@Button>:
+    background_normal: ''
+    background_down: ''
+    background_color: 0, 0, 0, 0
+    border: 0, 0, 0, 0
+    color: 0.76, 0.93, 1, 1
+    font_name: 'Eurostile.ttf'
+    font_size: dp(10)
+    canvas.before:
+        Color:
+            rgba: (0.025, 0.16, 0.22, 0.98) if self.state == 'normal' else (0.03, 0.34, 0.43, 1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(5), dp(5), dp(5), dp(5)]
+
+        Color:
+            rgba: 0.05, 0.72, 0.95, 0.78
+        Line:
+            rounded_rectangle: self.x, self.y, self.width, self.height, dp(5)
+            width: 1
+
+<ModeLabel@Label>:
+    font_name: 'Eurostile.ttf'
+    color: 0.48, 0.72, 0.80, 0.9
+    font_size: dp(9)
+
+<Modes>:
+    size_hint: 1, 1
+
+    canvas.before:
+        Color:
+            rgba: 0.002, 0.006, 0.012, 0.975
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+        Color:
+            rgba: 0.004, 0.018, 0.028, 0.99
+        RoundedRectangle:
+            pos: self.center_x - dp(440), self.center_y - dp(260)
+            size: dp(880), dp(520)
+            radius: [dp(12), dp(12), dp(12), dp(12)]
+
+        Color:
+            rgba: 0.04, 0.65, 0.85, 0.75
+        Line:
+            rounded_rectangle: self.center_x - dp(440), self.center_y - dp(260), dp(880), dp(520), dp(12)
+            width: 1.1
+
+        Color:
+            rgba: 0.04, 0.55, 0.72, 0.42
+        Rectangle:
+            pos: self.center_x - dp(385), self.center_y + dp(145)
+            size: dp(770), dp(1)
+
+        Rectangle:
+            pos: self.center_x - dp(385), self.center_y - dp(170)
+            size: dp(770), dp(1)
+
+    Label:
+        text: 'FLIGHT CONFIGURATION'
+        font_name: 'Eurostile.ttf'
+        font_size: dp(9)
+        color: 0.20, 0.70, 0.85, 0.9
+        size_hint: None, None
+        size: dp(500), dp(25)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.78}
+        halign: 'center'
+        valign: 'middle'
+        text_size: self.size
+
+    Label:
+        text: 'SPEED PROFILE'
+        font_name: 'Eurostile.ttf'
+        font_size: dp(9)
+        color: 0.58, 0.78, 0.84, 0.9
+        size_hint: None, None
+        size: dp(180), dp(25)
+        pos_hint: {'x': 0.25, 'center_y': 0.68}
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.size
+
+    ModeButton:
+        id: toggle_button_1
+        text: 'TURTLE  //  05'
+        size_hint: None, None
+        size: dp(250), dp(48)
+        pos_hint: {'x': 0.25, 'center_y': 0.59}
+
+    ModeButton:
+        id: toggle_button_2
+        text: 'SONIC  //  12'
+        size_hint: None, None
+        size: dp(250), dp(48)
+        pos_hint: {'x': 0.53, 'center_y': 0.59}
+
+    Label:
+        text: 'TRACK WIDTH'
+        font_name: 'Eurostile.ttf'
+        font_size: dp(9)
+        color: 0.58, 0.78, 0.84, 0.9
+        size_hint: None, None
+        size: dp(180), dp(25)
+        pos_hint: {'x': 0.25, 'center_y': 0.47}
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.size
+
+    ModeButton:
+        id: tight_button
+        text: 'TIGHT  //  04'
+        size_hint: None, None
+        size: dp(250), dp(48)
+        pos_hint: {'x': 0.25, 'center_y': 0.38}
+
+    ModeButton:
+        id: wide_button
+        text: 'WIDE  //  20'
+        size_hint: None, None
+        size: dp(250), dp(48)
+        pos_hint: {'x': 0.53, 'center_y': 0.38}
+
+    ModeButton:
+        id: return_button
+        text: '←  RETURN TO MENU'
+        size_hint: None, None
+        size: dp(300), dp(50)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.24}
+
+    Label:
+        text: 'NORMAL SPEED: 08   //   NORMAL WIDTH: 08'
+        font_name: 'Eurostile.ttf'
+        font_size: dp(8)
+        color: 0.30, 0.58, 0.68, 0.8
+        size_hint: None, None
+        size: dp(500), dp(20)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+        halign: 'center'
+        valign: 'middle'
+        text_size: self.size
+
+    Label:
+        text: 'SYSTEM // CONFIGURATION READY'
+        font_name: 'Eurostile.ttf'
+        font_size: dp(8)
+        color: 0.20, 0.85, 0.60, 0.85
+        size_hint: None, None
+        size: dp(500), dp(20)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.10}
+        halign: 'center'
+        valign: 'middle'
+        text_size: self.size
